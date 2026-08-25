@@ -7,6 +7,11 @@ updates:
     groups:
       development-dependencies:
         dependency-type: development
+    ignore:
+      # typescript-eslint currently declares TypeScript <6.1; avoid red
+      # update jobs until the lint stack supports the next major.
+      - dependency-name: typescript
+        versions: [">=6.0.0"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
