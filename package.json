@@ -1,0 +1,114 @@
+{
+  "name": "agent-reconcile",
+  "version": "0.1.0",
+  "description": "Repair interrupted AI agent tool-call histories into safe, replayable transcripts.",
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "tool-calls",
+    "recovery",
+    "reconciliation",
+    "openai",
+    "anthropic",
+    "gemini"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "author": "Atomics Hub",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Atomics-hub/agent-reconcile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Atomics-hub/agent-reconcile/issues"
+  },
+  "homepage": "https://github.com/Atomics-hub/agent-reconcile#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@11.6.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "adapters": [
+        "dist/adapters.d.ts"
+      ],
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./adapters": {
+      "import": {
+        "types": "./dist/adapters.d.ts",
+        "default": "./dist/adapters.js"
+      },
+      "require": {
+        "types": "./dist/adapters.d.cts",
+        "default": "./dist/adapters.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "agent-reconcile": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:package": "node scripts/verify-package.mjs",
+    "test:runtime": "node test/runtime-smoke.mjs",
+    "lint": "eslint .",
+    "lint:package": "node scripts/lint-package.mjs",
+    "format:check": "prettier --check .",
+    "pack:check": "npm pack --dry-run --cache .npm-cache",
+    "release:check": "node scripts/check-release.mjs",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run release:check && npm run lint:package && npm run test:package && npm run test:runtime && npm run pack:check",
+    "prepublishOnly": "npm run verify"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "eslint": "^10.9.0",
+    "fast-check": "^4.3.0",
+    "prettier": "^3.6.2",
+    "publint": "^0.3.24",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^4.1.11"
+  }
+}

@@ -1,0 +1,27 @@
+name: Bug report
+description: Report incorrect reconciliation or provider conversion.
+title: "bug: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Synthetic reproduction
+      description: Remove secrets and personal data. Include the smallest synthetic message array that reproduces the issue.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Format
+      options: [canonical, OpenAI, Anthropic, Gemini, Vercel AI SDK]
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Package and Node versions
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
